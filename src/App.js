@@ -1,24 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import Home from "./pages/home/Home";
+import Login from "./pages/login/Login";
+import Register from "./pages/register/Register";
+import Settings from "./pages/settings/Settings";
+import { Write } from "./pages/write/Write";
+import SinglePost from "./singlePost/SinglePost";
+import { Topbar } from "./topbar/Topbar";
+import {  BrowserRouter,  Routes,  Route } from "react-router-dom";
+import About from "./component/About";
+import Contact from "./component/Contact";
 
 function App() {
+  const user = false;
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Topbar /> 
+      <Routes>
+        <Route path="/" element= {<Home />} />
+        <Route path="/about" element= {<About />} />
+        <Route path="/contact" element= {<Contact />} />
+        <Route path="/login" element= {user ? <Home /> : <Login />} />
+        <Route path="/register" element= {user ? <Home /> : <Register />} />
+        <Route path="/write" element= {user ? <Write /> : <Register />} />
+        <Route path="/settings" element= {user ? <Settings /> : <Register />} />
+        <Route path="/post/:postid" element= {<SinglePost />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
